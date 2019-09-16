@@ -1,14 +1,112 @@
 <div class="container">
-  <div>kennykennykennykennykennykennykennykennykenny111</div>
-  <div>kennykennykennykennykennykennykennykennykenny222</div>
-  <div>kennykennykennykennykennykennykennykennykenny333</div>
-  <div>kennykennykennykennykennykennykennykennykenny444</div>
-  <div>kennykennykennykennykennykennykennykennykenny555</div>
-  <div>kennykennykennykennykennykennykennykennykenn666y</div>
-  <div>kennykennykennykennykennykennykennykennykenny777</div>
-  <div>kennykennykennykennykennykennykennykennykenny</div>
-  <div>kennykennykennykennykennykennykennykennykenny</div>
-  <div>kennykennykennykennykennykennykennykennykenny</div>
-  <div>kennykennykennykennykennykennykennykennykenny</div>
-  <div>kennykennykennykennykennykennykennykennykenny</div>
+  <div>
+    <h2>User Homepage</h2>
+    <p>enjoy your training</p>
+    <tabset>
+      <!-- search tab -->
+      <tab heading="Search" id="tab1">
+        <div class="col-auto pl-0 pt-3">
+          <label class="sr-only" for="inlineFormInputGroup">Training Name</label>
+          <div class="input-group mb-2">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <!-- 显示引用 -->
+                <fa-icon [icon]="faSearch"></fa-icon>
+                <!-- 隐式引用 fas表示solid包/far表示regular包-->
+                <!-- <fa-icon [icon]="['fas', 'search']"></fa-icon><br> -->
+              </div>
+            </div>
+            <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Training Name">
+          </div>
+        </div>
+        <br>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Mentor</th>
+              <th scope="col">Training</th>
+              <th scope="col">Experience</th>
+              <th scope="col">Delivered total</th>
+              <th scope="col">Avialable time</th>
+              <th scope="col">Fee charged</th>
+              <th scope="col">Proposal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let training of trainings; index as trainingId">
+              <td class="align-middle">{{trainingId + 1}}</td>
+              <td class="align-middle">{{training.mentor}}</td>
+              <td class="align-middle">{{training.training}}</td>
+              <td class="align-middle">{{training.experience}} year</td>
+              <td class="align-middle">{{training.deliveredTotal}}</td>
+              <td class="align-middle">{{training.avialableTimeStart}} ~ {{training.avialableTimeEnd}}</td>
+              <td class="align-middle">{{training.feeCharged | currency}}</td>
+              <td style="width:10%">
+                <button type="button" class="btn btn-outline-primary btn-sm"
+                  (click)="sendProposal(training)">Send</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </tab>
+      <!-- in progress tab -->
+      <tab heading="In progress">
+        <!-- <p>P:sent proposal;C:confirmed not charged;A:charged/avialable;S:started</p> -->
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Mentor</th>
+              <th scope="col">Training</th>
+              <th scope="col">Status</th>
+              <th scope="col">Operation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let history of historyInProgress; index as historyId">
+              <td class="align-middle">{{historyId + 1}}</td>
+              <td class="align-middle">{{history.training.mentor}}</td>
+              <td class="align-middle">{{history.training.training}}</td>
+              <td class="align-middle">{{history.trainingStatus}}</td>
+              <td style="width:10%">
+                <button *ngIf="history.trainingStatus === 'P'" type="button"
+                  class="btn btn-outline-primary btn-sm btn-block" (click)="sendProposal(history)">Send</button>
+                <button *ngIf="history.trainingStatus === 'C'" type="button"
+                  class="btn btn-outline-primary btn-sm btn-block" (click)="sendProposal(history)">Pay</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </tab>
+      <!-- completed tab -->
+      <tab heading="Completed">
+        <!-- <p>F:finished</p> -->
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Mentor</th>
+              <th scope="col">Training</th>
+              <th scope="col">Status</th>
+              <th scope="col">Operation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let history of historyCompleted; index as historyId">
+              <td class="align-middle">{{historyId + 1}}</td>
+              <td class="align-middle">{{history.training.mentor}}</td>
+              <td class="align-middle">{{history.training.training}}</td>
+              <td class="align-middle">{{history.trainingStatus}}</td>
+              <td style="width:10%">
+                <rating [(ngModel)]="history.rating" [max]="max" [readonly]="isReadonly"></rating>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </tab>
+    </tabset>
+  </div>
 </div>

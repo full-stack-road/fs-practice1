@@ -4,10 +4,12 @@ import { FormsModule }    from '@angular/forms';
 
 import { SignInComponent } from './sign-in/sign-in.component';
 import { AuthRoutingModule } from './auth-routing.module';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
-    SignInComponent
+    SignInComponent,
+    SignUpComponent
   ],
   imports: [
     CommonModule,
