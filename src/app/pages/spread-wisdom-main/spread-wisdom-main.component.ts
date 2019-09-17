@@ -37,7 +37,14 @@ export class SpreadWisdomMainComponent implements OnInit {
   }
 
   sendProposal(training: TrainingWithMentor) {
-    window.alert("send proposal to mentor " + training.mentor);
+    window.alert("send proposal to mentor " + training.mentor + " and create history");
+  }
+  modifyProposal(history: TrainingHistory) {
+    window.alert("modify proposal of mentor " + history.training.mentor);
+  }
+
+  pay(history: TrainingHistory) {
+    window.alert("pay for training " + history.training.training);
   }
 
   getTrainingWithMentors(): void {

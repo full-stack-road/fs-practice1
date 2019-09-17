@@ -72,9 +72,9 @@
               <td class="align-middle">{{history.trainingStatus}}</td>
               <td style="width:10%">
                 <button *ngIf="history.trainingStatus === 'P'" type="button"
-                  class="btn btn-outline-primary btn-sm btn-block" (click)="sendProposal(history)">Send</button>
+                  class="btn btn-outline-primary btn-sm btn-block" (click)="modifyProposal(history)">Send</button>
                 <button *ngIf="history.trainingStatus === 'C'" type="button"
-                  class="btn btn-outline-primary btn-sm btn-block" (click)="sendProposal(history)">Pay</button>
+                  class="btn btn-outline-primary btn-sm btn-block" (click)="pay(history)">Pay</button>
               </td>
             </tr>
           </tbody>
