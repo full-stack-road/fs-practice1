@@ -10,6 +10,8 @@ import { TrainingWithMentor } from '../trainingWithMentor';
 import { TrainingHistoryService } from '../training-history-service';
 import { TrainingHistory } from '../trainingHistory';
 
+import { NgxSpinnerService } from "ngx-spinner";
+
 
 @Component({
   selector: 'app-spread-wisdom-main',
@@ -31,7 +33,8 @@ export class SpreadWisdomMainComponent implements OnInit {
 
   constructor(library: FaIconLibrary,
     private trainingWithMentorService: TrainingWithMentorService,
-    private trainingHistoryService: TrainingHistoryService) {
+    private trainingHistoryService: TrainingHistoryService,
+    private spinner: NgxSpinnerService) {
     //隐式引用fortawesome
     library.addIcons(faSearch);
   }
@@ -57,7 +60,11 @@ export class SpreadWisdomMainComponent implements OnInit {
         this.trainingHistorys = trainingHistorys;
         this.trainingHistorys.forEach(elem => {
           (elem.trainingStatus === 'F') ? this.historyCompleted.push(elem) : this.historyInProgress.push(elem)
-        });
+        },
+          setTimeout(() => {
+            this.spinner.hide("mainSpinner");
+          }, 1000)
+        );
       }
       );
   }

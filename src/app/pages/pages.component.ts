@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from "ngx-spinner";
 
 
 @Component({
@@ -7,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pages.component.scss']
 })
 export class PagesComponent implements OnInit {
+  mainSpinner = "mainSpinner"
 
-  constructor() { }
+  constructor(private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
+    /** spinner starts on init */
+    this.spinner.show(this.mainSpinner);
   }
 
 }
